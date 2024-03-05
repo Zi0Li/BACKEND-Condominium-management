@@ -1,74 +1,60 @@
 package br.com.smartcondo.services;
 
+import br.com.smartcondo.exceptions.ResourceNotFoundException;
 import br.com.smartcondo.models.Resident;
+import br.com.smartcondo.repositories.ResidentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 
 @Service
 public class ResidentServices {
 
-    private final AtomicLong counter = new AtomicLong();
     private Logger logger = Logger.getLogger(ResidentServices.class.getName());
+
+    @Autowired
+    ResidentRepository repository;
 
     public List<Resident> findAll() {
         logger.info("Finding all peoples!");
 
-        List<Resident> residents = new ArrayList<>();
-
-        for (int i = 0; i < 8; i++) {
-            Resident resident = mockResident(i);
-            residents.add(resident);
-        }
-
-        return residents;
+        return repository.findAll();
     }
 
-    public Resident findById(Long id){
-        logger.info("Find one resident!");
-        Resident resident = new Resident();
-        resident.setId(id);
-        resident.setName("Marcelo Zioli");
-        resident.setCpf("111.222.333-44");
-        resident.setRg("55.666.777-X");
-        resident.setPhone("(18) 9 9805-0504");
-        resident.setAge(id.intValue());
-
-        return resident;
+    public Resident findById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
     public Resident update(Resident resident) {
 
         logger.info("Updating one resident!");
 
-        return resident;
+        Resident entity = repository.findById(resident.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+
+        entity.setName(resident.getName());
+        entity.setRg(resident.getRg());
+        entity.setCpf(resident.getCpf());
+        entity.setAge(resident.getAge());
+        entity.setPhone(resident.getPhone());
+
+        return repository.save(resident);
     }
 
-    public void delete(int id) {
+    public void delete(Long id) {
 
         logger.info("Deleting one resident!");
 
+        Resident entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+
+        repository.delete(entity);
     }
 
     public Resident create(Resident resident) {
 
         logger.info("Creating one resident!");
 
-        return resident;
-    }
-
-
-    private Resident mockResident(int i) {
-        Resident resident = new Resident();
-        resident.setId(counter.incrementAndGet());
-        resident.setName("Resident name" + i);
-        resident.setCpf("Cpf" + i);
-        resident.setRg("Rg" + i);
-        resident.setPhone("Phone" + i);
-        resident.setAge(i + 20);
-        return resident;
+        return repository.save(resident);
     }
 }

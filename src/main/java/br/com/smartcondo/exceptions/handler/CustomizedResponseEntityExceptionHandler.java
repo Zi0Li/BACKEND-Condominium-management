@@ -1,7 +1,7 @@
 package br.com.smartcondo.exceptions.handler;
 
 import br.com.smartcondo.exceptions.ExceptionResponse;
-import br.com.smartcondo.exceptions.UnsupportedMathOperationException;
+import br.com.smartcondo.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,27 +15,27 @@ import java.util.Date;
 @ControllerAdvice
 @RestController
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler{
-	
+
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<ExceptionResponse> handlerAllExceptions(
 			Exception ex, WebRequest request) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse(
-				new Date(), 
+				new Date(),
 				ex.getMessage(),
 				request.getDescription(false));
-		
+
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-	@ExceptionHandler(UnsupportedMathOperationException.class)
-	public final ResponseEntity<ExceptionResponse> handlerBadResquestExceptions(
+
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public final ResponseEntity<ExceptionResponse> handlerNotFoundExceptions(
 			Exception ex, WebRequest request) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse(
-				new Date(), 
+				new Date(),
 				ex.getMessage(),
 				request.getDescription(false));
-		
-		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
-	
+
 }

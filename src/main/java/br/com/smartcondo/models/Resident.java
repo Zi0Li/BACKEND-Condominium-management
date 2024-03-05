@@ -1,16 +1,36 @@
 package br.com.smartcondo.models;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.persistence.*;
+import org.springframework.core.annotation.Order;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+@Entity
+@Table(name = "resident")
+@JsonPropertyOrder({"id", "name", "cpf", "rg", "age","phone"})
 public class Resident implements Serializable {
 
     private static final Long seriaVersionUID = 1L;
 
-    long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+
+    @Column(nullable = false)
     String cpf;
+
+    @Column(nullable = false)
     String rg;
+
+    @Column(nullable = false)
     String name;
+
+    @Column(nullable = false)
     int age;
+
+    @Column(nullable = false)
     String phone;
 
     public Long getId() {
@@ -65,5 +85,18 @@ public class Resident implements Serializable {
     public Resident setPhone(String phone) {
         this.phone = phone;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Resident resident = (Resident) o;
+        return age == resident.age && Objects.equals(id, resident.id) && Objects.equals(cpf, resident.cpf) && Objects.equals(rg, resident.rg) && Objects.equals(name, resident.name) && Objects.equals(phone, resident.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cpf, rg, name, age, phone);
     }
 }
