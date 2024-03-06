@@ -24,6 +24,8 @@ public class ResidentServices {
     }
 
     public Resident findById(Long id) {
+        logger.info("Finding one people!");
+
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 

@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "resident")
-@JsonPropertyOrder({"id", "name", "cpf", "rg", "age","phone"})
+@JsonPropertyOrder({"id", "name", "cpf", "rg", "age", "phone"})
 public class Resident implements Serializable {
 
     private static final Long seriaVersionUID = 1L;
@@ -32,6 +32,9 @@ public class Resident implements Serializable {
 
     @Column(nullable = false)
     String phone;
+
+    @Column(nullable = false)
+    String email;
 
     public Long getId() {
         return id;
@@ -87,16 +90,25 @@ public class Resident implements Serializable {
         return this;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public Resident setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Resident resident = (Resident) o;
-        return age == resident.age && Objects.equals(id, resident.id) && Objects.equals(cpf, resident.cpf) && Objects.equals(rg, resident.rg) && Objects.equals(name, resident.name) && Objects.equals(phone, resident.phone);
+        return age == resident.age && Objects.equals(id, resident.id) && Objects.equals(cpf, resident.cpf) && Objects.equals(rg, resident.rg) && Objects.equals(name, resident.name) && Objects.equals(phone, resident.phone) && Objects.equals(email, resident.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cpf, rg, name, age, phone);
+        return Objects.hash(id, cpf, rg, name, age, phone, email);
     }
 }
