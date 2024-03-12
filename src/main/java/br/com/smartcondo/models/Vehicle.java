@@ -1,6 +1,9 @@
 package br.com.smartcondo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.Objects;
 
 @Entity
 @Table(name = "vehicle")
@@ -26,6 +29,11 @@ public class Vehicle {
 
     @Column(nullable = false)
     String year;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "resident_id", nullable = false)
+    @JsonBackReference
+    private Resident resident;
 
 
     public Long getId() {
@@ -89,5 +97,41 @@ public class Vehicle {
     public Vehicle setYear(String year) {
         this.year = year;
         return this;
+    }
+
+    public Resident getResident() {
+        return resident;
+    }
+
+    public Vehicle setResident(Resident resident) {
+        this.resident = resident;
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return Objects.equals(id, vehicle.id) && Objects.equals(plate, vehicle.plate) && Objects.equals(type, vehicle.type) && Objects.equals(brand, vehicle.brand) && Objects.equals(color, vehicle.color) && Objects.equals(model, vehicle.model) && Objects.equals(year, vehicle.year) && Objects.equals(resident, vehicle.resident);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, plate, type, brand, color, model, year, resident);
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "id=" + id +
+                ", plate='" + plate + '\'' +
+                ", type='" + type + '\'' +
+                ", brand='" + brand + '\'' +
+                ", color='" + color + '\'' +
+                ", model='" + model + '\'' +
+                ", year='" + year + '\'' +
+                ", resident=" + resident +
+                '}';
     }
 }

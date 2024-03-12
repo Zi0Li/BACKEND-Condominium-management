@@ -1,5 +1,6 @@
 package br.com.smartcondo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -26,6 +27,11 @@ public class AuthorizedPersons {
 
     @Column(nullable = false)
     String phone;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "resident_id", nullable = false)
+    @JsonBackReference
+    private Resident resident;
 
     public Long getId() {
         return id;
@@ -81,16 +87,25 @@ public class AuthorizedPersons {
         return this;
     }
 
+    public Resident getResident() {
+        return resident;
+    }
+
+    public AuthorizedPersons setResident(Resident resident) {
+        this.resident = resident;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AuthorizedPersons that = (AuthorizedPersons) o;
-        return id == that.id && Objects.equals(name, that.name) && Objects.equals(rg, that.rg) && Objects.equals(cpf, that.cpf) && Objects.equals(kinship, that.kinship) && Objects.equals(phone, that.phone);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(rg, that.rg) && Objects.equals(cpf, that.cpf) && Objects.equals(kinship, that.kinship) && Objects.equals(phone, that.phone) && Objects.equals(resident, that.resident);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, rg, cpf, kinship, phone);
+        return Objects.hash(id, name, rg, cpf, kinship, phone, resident);
     }
 }
