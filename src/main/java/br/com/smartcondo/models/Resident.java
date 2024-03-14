@@ -2,18 +2,14 @@ package br.com.smartcondo.models;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
-import org.springframework.core.annotation.Order;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "resident")
 @JsonPropertyOrder({"id", "name", "cpf", "rg", "age", "phone"})
-public class Resident implements Serializable {
-
-    private static final Long seriaVersionUID = 1L;
+public class Resident{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

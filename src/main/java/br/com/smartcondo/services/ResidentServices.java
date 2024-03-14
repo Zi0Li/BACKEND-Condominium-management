@@ -15,48 +15,51 @@ public class ResidentServices {
     private Logger logger = Logger.getLogger(ResidentServices.class.getName());
 
     @Autowired
-    ResidentRepository repository;
+    ResidentRepository residentRepository;
+    UsersServices usersServices;
+
 
     public List<Resident> findAll() {
         logger.info("Finding all peoples!");
 
-        return repository.findAll();
+        return residentRepository.findAll();
     }
 
     public Resident findById(Long id) {
         logger.info("Finding one people!");
 
-        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        return residentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
     public Resident update(Resident resident) {
 
         logger.info("Updating one resident!");
 
-        Resident entity = repository.findById(resident.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        Resident entity = residentRepository.findById(resident.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
         entity.setName(resident.getName());
         entity.setRg(resident.getRg());
         entity.setCpf(resident.getCpf());
         entity.setAge(resident.getAge());
+        entity.setEmail(resident.getEmail());
         entity.setPhone(resident.getPhone());
 
-        return repository.save(resident);
+        return residentRepository.save(resident);
     }
 
     public void delete(Long id) {
 
         logger.info("Deleting one resident!");
 
-        Resident entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        Resident entity = residentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
-        repository.delete(entity);
+        residentRepository.delete(entity);
     }
 
     public Resident create(Resident resident) {
 
         logger.info("Creating one resident!");
 
-        return repository.save(resident);
+        return residentRepository.save(resident);
     }
 }
