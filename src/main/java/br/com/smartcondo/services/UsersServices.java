@@ -35,10 +35,10 @@ public class UsersServices {
 
         Users entity = repository.findById(user.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
-        entity.setEmail(user.getEmail());
+        entity.setLogin(user.getLogin());
         entity.setPassword(user.getPassword());
         entity.setUser_id(user.getUser_id());
-        entity.setUser_type(user.getUser_type());
+        entity.setRole(user.getRole());
 
         return repository.save(user);
     }

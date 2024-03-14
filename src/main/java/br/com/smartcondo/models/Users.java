@@ -1,30 +1,44 @@
 package br.com.smartcondo.models;
 
+import br.com.smartcondo.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Objects;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 @JsonPropertyOrder({"id", "user_id", "user_type", "email", "password"})
-public class Users {
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(nullable = false)
-    Long user_id;
+    private Long user_id;
 
     @Column(nullable = false)
-    String email;
+    private String login;
 
     @Column(nullable = false)
-    String password;
+    private String password;
 
     @Column(nullable = false)
-    String user_type;
+    private UserRole role;
+
+    public Users(){}
+
+    public Users(String login, String password, UserRole role, Long user_id) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+        this.user_id = user_id;
+    }
 
     public Long getId() {
         return id;
@@ -44,15 +58,16 @@ public class Users {
         return this;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public Users setEmail(String email) {
-        this.email = email;
+    public Users setLogin(String login) {
+        this.login = login;
         return this;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -62,25 +77,48 @@ public class Users {
         return this;
     }
 
-    public String getUser_type() {
-        return user_type;
+    public UserRole getRole() {
+        return role;
     }
 
-    public Users setUser_type(String user_type) {
-        this.user_type = user_type;
+    public Users setRole(UserRole role) {
+        this.role = role;
         return this;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Users users = (Users) o;
-        return Objects.equals(id, users.id) && Objects.equals(user_id, users.user_id) && Objects.equals(email, users.email) && Objects.equals(password, users.password) && Objects.equals(user_type, users.user_type);
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.role == UserRole.SINDICO) {
+            return List.of(new SimpleGrantedAuthority("ROLE_SINDICO"), new SimpleGrantedAuthority("ROLE_FUNCIONARIO"));
+        } else if (this.role == UserRole.FUNCIONARIO) {
+            return List.of(new SimpleGrantedAuthority("ROLE_FUNCIONARIO"));
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_MORADOR"));
+        }
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, user_id, email, password, user_type);
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

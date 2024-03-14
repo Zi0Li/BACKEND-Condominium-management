@@ -1,9 +1,7 @@
 package br.com.smartcondo.controllers;
 
-import br.com.smartcondo.models.Resident;
 import br.com.smartcondo.models.Users;
 import br.com.smartcondo.services.UsersServices;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-public class UsesController {
+public class UsersController {
 
     @Autowired
     private UsersServices service = new UsersServices();
