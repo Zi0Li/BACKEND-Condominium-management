@@ -16,8 +16,6 @@ public class ResidentServices {
 
     @Autowired
     ResidentRepository residentRepository;
-    UsersServices usersServices;
-
 
     public List<Resident> findAll() {
         logger.info("Finding all peoples!");

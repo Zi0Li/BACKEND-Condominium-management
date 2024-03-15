@@ -1,4 +1,6 @@
 package br.com.smartcondo.records;
 
-public record LoginResponseDTO(String token) {
+import br.com.smartcondo.enums.UserRole;
+
+public record LoginResponseDTO(String token, String role, Object entity) {
 }
