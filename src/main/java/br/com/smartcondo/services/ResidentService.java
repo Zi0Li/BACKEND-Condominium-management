@@ -10,9 +10,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
-public class ResidentServices {
-
-    private Logger logger = Logger.getLogger(ResidentServices.class.getName());
+public class ResidentService {
+    private Logger logger = Logger.getLogger(ResidentService.class.getName());
 
     @Autowired
     ResidentRepository residentRepository;

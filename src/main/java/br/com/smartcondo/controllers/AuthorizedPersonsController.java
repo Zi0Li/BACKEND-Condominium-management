@@ -1,7 +1,7 @@
 package br.com.smartcondo.controllers;
 
 import br.com.smartcondo.models.AuthorizedPersons;
-import br.com.smartcondo.services.AuthorizedPersonsServices;
+import br.com.smartcondo.services.AuthorizedPersonsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 public class AuthorizedPersonsController {
 
     @Autowired
-    private AuthorizedPersonsServices service = new AuthorizedPersonsServices();
+    private AuthorizedPersonsService service = new AuthorizedPersonsService();
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<AuthorizedPersons> findAll() {

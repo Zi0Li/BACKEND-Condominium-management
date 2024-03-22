@@ -2,7 +2,7 @@ package br.com.smartcondo.controllers;
 
 
 import br.com.smartcondo.models.Vehicle;
-import br.com.smartcondo.services.VehicleServices;
+import br.com.smartcondo.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.List;
 public class VehicleController {
 
     @Autowired
-    private VehicleServices service = new VehicleServices();
+    private VehicleService service = new VehicleService();
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Vehicle> findAll() {

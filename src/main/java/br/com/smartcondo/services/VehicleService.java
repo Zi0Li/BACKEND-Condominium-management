@@ -1,7 +1,6 @@
 package br.com.smartcondo.services;
 
 import br.com.smartcondo.exceptions.ResourceNotFoundException;
-import br.com.smartcondo.models.Resident;
 import br.com.smartcondo.models.Vehicle;
 import br.com.smartcondo.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
-public class VehicleServices {
+public class VehicleService {
 
-    private Logger logger = Logger.getLogger(ResidentServices.class.getName());
+    private Logger logger = Logger.getLogger(ResidentService.class.getName());
 
     @Autowired
     VehicleRepository repository;

@@ -1,7 +1,7 @@
 package br.com.smartcondo.controllers;
 
-import br.com.smartcondo.models.Resident;
-import br.com.smartcondo.services.ResidentService;
+import br.com.smartcondo.models.Syndicate;
+import br.com.smartcondo.services.SyndicateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -9,38 +9,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/resident")
-public class ResidentController {
+@RequestMapping("/syndicate")
+public class SyndicateController {
 
     @Autowired
-    private ResidentService service = new ResidentService();
+    private SyndicateService service;
 
     @GetMapping(produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<Resident> findAll() {
+    public List<Syndicate> findAll(){
         return service.findAll();
     }
 
-    @GetMapping(value = "/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
-    public Resident findById(@PathVariable(value = "id") long id) {
+    @GetMapping(value = "/{id}",produces= MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Syndicate findById(@PathVariable(value = "id") long id){
         return service.findById(id);
     }
 
-
     @PostMapping(produces= MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Resident create(@RequestBody Resident resident) {
-        return service.create(resident);
+    public Syndicate create(@RequestBody Syndicate syndicate){
+        return service.create(syndicate);
     }
-
 
     @PutMapping(produces= MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Resident update(@RequestBody Resident resident) {
-        return service.update(resident);
+    public Syndicate update(@RequestBody Syndicate syndicate){
+        return service.update(syndicate);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable(value = "id") Long id) {
+    public void delete(@PathVariable(value = "id") long id){
         service.delete(id);
     }
 }

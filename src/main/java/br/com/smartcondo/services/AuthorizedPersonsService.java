@@ -2,7 +2,6 @@ package br.com.smartcondo.services;
 
 import br.com.smartcondo.exceptions.ResourceNotFoundException;
 import br.com.smartcondo.models.AuthorizedPersons;
-import br.com.smartcondo.models.Resident;
 import br.com.smartcondo.repositories.AuthorizedPersonsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +10,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
-public class AuthorizedPersonsServices {
+public class AuthorizedPersonsService {
 
-    private Logger logger = Logger.getLogger(AuthorizedPersonsServices.class.getName());
+    private Logger logger = Logger.getLogger(AuthorizedPersonsService.class.getName());
 
     @Autowired
     AuthorizedPersonsRepository repository;
