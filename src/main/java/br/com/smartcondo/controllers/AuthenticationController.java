@@ -7,7 +7,11 @@ import br.com.smartcondo.records.AuthenticationDTO;
 import br.com.smartcondo.records.LoginResponseDTO;
 import br.com.smartcondo.records.RegisterDTO;
 import br.com.smartcondo.repositories.ResidentRepository;
+import br.com.smartcondo.repositories.SyndicateRepository;
 import br.com.smartcondo.repositories.UsersRepository;
+import br.com.smartcondo.services.EmployeeService;
+import br.com.smartcondo.services.ResidentService;
+import br.com.smartcondo.services.SyndicateService;
 import br.com.smartcondo.services.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +33,13 @@ public class AuthenticationController {
     UsersRepository usersRepository;
 
     @Autowired
-    ResidentRepository residentRepository;
+    SyndicateService syndicateService;
+
+    @Autowired
+    EmployeeService employeeService;
+
+    @Autowired
+    ResidentService residentService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -48,11 +58,11 @@ public class AuthenticationController {
         Object entity;
         String role = user.getRole().toString();
         if (user.getRole() == UserRole.MORADOR) {
-            entity = residentRepository.findById(user.getUser_id()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+            entity = residentService.findById(user.getUser_id());
         } else if (user.getRole() == UserRole.FUNCIONARIO) {
-            entity = null;
+            entity = employeeService.findById(user.getUser_id());
         } else if (user.getRole() == UserRole.SINDICO) {
-            entity = null;
+            entity = syndicateService.findById(user.getUser_id());
         } else {
             token = "";
             entity = null;
