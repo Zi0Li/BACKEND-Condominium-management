@@ -1,8 +1,7 @@
 package br.com.smartcondo.controllers;
 
-import br.com.smartcondo.models.Kiosk;
-import br.com.smartcondo.models.Resident;
-import br.com.smartcondo.services.KioskService;
+import br.com.smartcondo.models.Reservation;
+import br.com.smartcondo.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -10,39 +9,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/kiosk")
-public class kioskController {
+@RequestMapping("/reservation")
+public class ReservationController {
 
     @Autowired
-    private KioskService service = new KioskService();
+    ReservationService service = new ReservationService();
 
     @GetMapping(produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<Kiosk> findAll() {
+    public List<Reservation> findAll() {
         return service.findAll();
     }
 
     @GetMapping(value = "/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
-    public Kiosk findById(@PathVariable(value = "id") long id) {
+    public Reservation findById(@PathVariable(value = "id") long id) {
         return service.findById(id);
     }
 
 
     @PostMapping(produces= MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Kiosk create(@RequestBody Kiosk kiosk) {
-        return service.create(kiosk);
+    public Reservation create(@RequestBody Reservation reservation) {
+        return service.create(reservation);
     }
 
 
     @PutMapping(produces= MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Kiosk update(@RequestBody Kiosk kiosk) {
-        return service.update(kiosk);
+    public Reservation update(@RequestBody Reservation reservation) {
+        return service.update(reservation);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable(value = "id") Long id) {
         service.delete(id);
     }
-
 }

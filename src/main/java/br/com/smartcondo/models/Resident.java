@@ -1,5 +1,6 @@
 package br.com.smartcondo.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
@@ -39,6 +40,8 @@ public class Resident{
     @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
     private List<AuthorizedPersons> authorizedPersons;
 
+    @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
+    private List<Reservation> reservations;
 
     public Long getId() {
         return id;
@@ -121,17 +124,13 @@ public class Resident{
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Resident resident = (Resident) o;
-        return age == resident.age && Objects.equals(id, resident.id) && Objects.equals(cpf, resident.cpf) && Objects.equals(rg, resident.rg) && Objects.equals(name, resident.name) && Objects.equals(phone, resident.phone) && Objects.equals(email, resident.email) && Objects.equals(vehicles, resident.vehicles) && Objects.equals(authorizedPersons, resident.authorizedPersons);
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, cpf, rg, name, age, phone, email, vehicles, authorizedPersons);
+    public Resident setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+        return this;
     }
 
     @Override
@@ -145,6 +144,8 @@ public class Resident{
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", vehicles=" + vehicles +
+                ", authorizedPersons=" + authorizedPersons +
+                ", reservations=" + reservations +
                 '}';
     }
 }

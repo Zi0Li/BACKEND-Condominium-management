@@ -1,6 +1,9 @@
 package br.com.smartcondo.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "kiosk")
@@ -15,6 +18,9 @@ public class Kiosk {
 
     @Column(nullable = false)
     String description;
+
+    @OneToMany(mappedBy = "kiosk", fetch = FetchType.EAGER)
+    private List<Reservation> reservations;
 
     public Long getId() {
         return id;
@@ -43,12 +49,22 @@ public class Kiosk {
         return this;
     }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public Kiosk setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Kiosk{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
+                ", reservations=" + reservations +
                 '}';
     }
 }
