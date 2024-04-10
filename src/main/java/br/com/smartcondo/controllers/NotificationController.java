@@ -25,6 +25,11 @@ public class NotificationController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "/condominium={id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Notification> findByIdCondominium(@PathVariable(value = "id") long id) {
+        return service.findByIdCondominium(id);
+    }
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Notification create(@RequestBody Notification notification) {
         return service.create(notification);

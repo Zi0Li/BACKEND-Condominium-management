@@ -25,6 +25,10 @@ public class KioskController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "/condominium={id}", produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<Kiosk> findByIdCondominium(@PathVariable(value = "id") long id) {
+        return service.findByIdCondominium(id);
+    }
 
     @PostMapping(produces= MediaType.APPLICATION_JSON_VALUE,
             consumes = {"application/json"})

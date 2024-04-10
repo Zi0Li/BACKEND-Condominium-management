@@ -25,6 +25,10 @@ public class ResidentController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "/condominium={id}", produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<Resident> findByIdCondominium(@PathVariable(value = "id") long id) {
+        return service.findByIdCondominium(id);
+    }
 
     @PostMapping(produces= MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)

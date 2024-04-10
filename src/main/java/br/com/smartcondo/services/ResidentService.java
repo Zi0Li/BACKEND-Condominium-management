@@ -28,6 +28,12 @@ public class ResidentService {
         return residentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
+    public List<Resident> findByIdCondominium(Long id){
+        logger.info("Finding all peoples this condominium");
+
+        return residentRepository.findByCondominium_id(id);
+    }
+
     public Resident update(Resident resident) {
 
         logger.info("Updating one resident!");

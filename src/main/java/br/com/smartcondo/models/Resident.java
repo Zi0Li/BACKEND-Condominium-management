@@ -13,38 +13,38 @@ public class Resident{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(nullable = false)
-    String cpf;
+    private String cpf;
 
     @Column(nullable = false)
-    String rg;
+    private String rg;
 
     @Column(nullable = false)
-    String name;
+    private String name;
 
     @Column(nullable = false)
     int age;
 
     @Column(nullable = false)
-    String phone;
+    private String phone;
 
     @Column(nullable = false)
-    String email;
+    private String email;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "condominium_id", nullable = false)
     @JsonBackReference(value = "condominium")
     private Condominium condominium;
 
-    @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resident")
     private List<Vehicle> vehicles;
 
-    @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resident")
     private List<AuthorizedPersons> authorizedPersons;
 
-    @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resident")
     private List<Reservation> reservations;
 
     public Long getId() {
@@ -110,29 +110,29 @@ public class Resident{
         return this;
     }
 
-    public List<Vehicle> getVehicles() {
+    private List<Vehicle> getVehicles() {
         return vehicles;
     }
 
-    public Resident setVehicles(List<Vehicle> vehicles) {
+    private Resident setVehicles(List<Vehicle> vehicles) {
         this.vehicles = vehicles;
         return this;
     }
 
-    public List<AuthorizedPersons> getAuthorizedPersons() {
+    private List<AuthorizedPersons> getAuthorizedPersons() {
         return authorizedPersons;
     }
 
-    public Resident setAuthorizedPersons(List<AuthorizedPersons> authorizedPersons) {
+    private Resident setAuthorizedPersons(List<AuthorizedPersons> authorizedPersons) {
         this.authorizedPersons = authorizedPersons;
         return this;
     }
 
-    public List<Reservation> getReservations() {
+    private List<Reservation> getReservations() {
         return reservations;
     }
 
-    public Resident setReservations(List<Reservation> reservations) {
+    private Resident setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
         return this;
     }

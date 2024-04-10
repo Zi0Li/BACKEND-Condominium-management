@@ -29,6 +29,12 @@ public class KioskService {
         return kioskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No record found for this ID"));
     }
 
+    public List<Kiosk> findByIdCondominium(Long id){
+        logger.info("Finding all kiosks this condominium");
+
+        return kioskRepository.findByCondominium_id(id);
+    }
+
     public Kiosk update(Kiosk kiosk) {
         logger.info("Updating one kiosk!");
 

@@ -25,6 +25,11 @@ public class EmployeeController {
         return employeeService.findById(id);
     }
 
+    @GetMapping(value = "/condominium={id}", produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<Employees> findByIdCondominium(@PathVariable(value = "id") long id) {
+        return employeeService.findByIdCondominium(id);
+    }
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Employees create(@RequestBody Employees employees) {
         return employeeService.create(employees);

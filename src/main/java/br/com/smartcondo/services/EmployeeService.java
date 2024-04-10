@@ -31,6 +31,12 @@ public class EmployeeService {
         return employeesRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
     }
 
+    public List<Employees> findByIdCondominium(Long id){
+        logger.info("Finding all employees this condominium");
+
+        return employeesRepository.findByCondominium_id(id);
+    }
+
     public Employees update(Employees employees){
 
         logger.info("Updating one employee!");

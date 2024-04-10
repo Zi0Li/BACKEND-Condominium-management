@@ -28,6 +28,12 @@ public class NotificationService {
         return notificationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
+    public List<Notification> findByIdCondominium(Long id){
+        logger.info("Finding all notification this condominium");
+
+        return notificationRepository.findByCondominium_id(id);
+    }
+
     public Notification update(Notification notification){
         logger.info("Updating one notification!");
 
