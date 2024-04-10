@@ -1,11 +1,10 @@
 package br.com.smartcondo.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "resident")
@@ -33,6 +32,11 @@ public class Resident{
 
     @Column(nullable = false)
     String email;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "condominium_id", nullable = false)
+    @JsonBackReference(value = "condominium")
+    private Condominium condominium;
 
     @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
     private List<Vehicle> vehicles;
@@ -133,6 +137,15 @@ public class Resident{
         return this;
     }
 
+    public Condominium getCondominium() {
+        return condominium;
+    }
+
+    public Resident setCondominium(Condominium condominium) {
+        this.condominium = condominium;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Resident{" +
@@ -146,6 +159,9 @@ public class Resident{
                 ", vehicles=" + vehicles +
                 ", authorizedPersons=" + authorizedPersons +
                 ", reservations=" + reservations +
+                ", condominium=" + condominium +
                 '}';
     }
+
+
 }

@@ -1,5 +1,6 @@
 package br.com.smartcondo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -30,6 +31,11 @@ public class Employees {
 
     @Column(nullable = false)
     String workload;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "condominium_id", nullable = false)
+    @JsonBackReference(value = "condominium")
+    private Condominium condominium;
 
     public Long getId() {
         return id;
@@ -100,6 +106,15 @@ public class Employees {
 
     public Employees setWorkload(String workload) {
         this.workload = workload;
+        return this;
+    }
+
+    public Condominium getCondominium() {
+        return condominium;
+    }
+
+    public Employees setCondominium(Condominium condominium) {
+        this.condominium = condominium;
         return this;
     }
 

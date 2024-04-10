@@ -2,6 +2,8 @@ package br.com.smartcondo.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "syndicate")
 public class Syndicate {
@@ -21,6 +23,9 @@ public class Syndicate {
 
     @Column(nullable = false)
     private String phone;
+
+    @OneToMany(mappedBy = "syndicate", fetch = FetchType.EAGER)
+    private List<Condominium> condominiums;
 
     public Long getId() {
         return id;
@@ -67,6 +72,15 @@ public class Syndicate {
         return this;
     }
 
+    public List<Condominium> getCondominiums() {
+        return condominiums;
+    }
+
+    public Syndicate setCondominiums(List<Condominium> condominiums) {
+        this.condominiums = condominiums;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Syndicate{" +
@@ -75,6 +89,7 @@ public class Syndicate {
                 ", rg='" + rg + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", phone='" + phone + '\'' +
+                ", condominiums=" + condominiums +
                 '}';
     }
 }

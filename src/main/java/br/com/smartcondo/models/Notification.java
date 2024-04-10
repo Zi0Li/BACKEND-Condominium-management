@@ -1,5 +1,6 @@
 package br.com.smartcondo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -20,6 +21,11 @@ public class Notification {
 
     @Column(nullable = false)
     String type;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "condominium_id", nullable = false)
+    @JsonBackReference(value = "condominium")
+    private Condominium condominium;
 
     public Long getId() {
         return id;
@@ -70,6 +76,15 @@ public class Notification {
         return Objects.hash(id, description, category, type);
     }
 
+    public Condominium getCondominium() {
+        return condominium;
+    }
+
+    public Notification setCondominium(Condominium condominium) {
+        this.condominium = condominium;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Notification{" +
@@ -77,6 +92,7 @@ public class Notification {
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
                 ", type='" + type + '\'' +
+                ", condominium=" + condominium +
                 '}';
     }
 }

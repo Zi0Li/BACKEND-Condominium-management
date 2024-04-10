@@ -1,6 +1,6 @@
 package br.com.smartcondo.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,6 +18,11 @@ public class Kiosk {
 
     @Column(nullable = false)
     String description;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "condominium_id", nullable = false)
+    @JsonBackReference(value = "condominium")
+    private Condominium condominium;
 
     @OneToMany(mappedBy = "kiosk", fetch = FetchType.EAGER)
     private List<Reservation> reservations;
@@ -58,12 +63,22 @@ public class Kiosk {
         return this;
     }
 
+    public Condominium getCondominium() {
+        return condominium;
+    }
+
+    public Kiosk setCondominium(Condominium condominium) {
+        this.condominium = condominium;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Kiosk{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
+                ", condominium=" + condominium +
                 ", reservations=" + reservations +
                 '}';
     }
