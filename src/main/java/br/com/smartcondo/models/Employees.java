@@ -21,9 +21,6 @@ public class Employees {
     String rg;
 
     @Column(nullable = false)
-    String cic;
-
-    @Column(nullable = false)
     String phone;
 
     @Column(nullable = false)
@@ -73,15 +70,6 @@ public class Employees {
         return this;
     }
 
-    public String getCic() {
-        return cic;
-    }
-
-    public Employees setCic(String cic) {
-        this.cic = cic;
-        return this;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -125,7 +113,6 @@ public class Employees {
                 ", name='" + name + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", rg='" + rg + '\'' +
-                ", cic='" + cic + '\'' +
                 ", phone='" + phone + '\'' +
                 ", position='" + position + '\'' +
                 ", workload='" + workload + '\'' +

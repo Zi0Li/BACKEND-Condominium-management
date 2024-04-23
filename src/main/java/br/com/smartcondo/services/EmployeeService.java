@@ -45,7 +45,6 @@ public class EmployeeService {
 
         entity.setName(employees.getName());
         entity.setCpf(employees.getCpf());
-        entity.setCic(employees.getCic());
         entity.setPhone(employees.getPhone());
         entity.setRg(employees.getRg());
         entity.setPosition(employees.getPosition());
