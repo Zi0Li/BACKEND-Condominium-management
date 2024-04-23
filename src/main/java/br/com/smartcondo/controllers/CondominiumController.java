@@ -25,6 +25,10 @@ public class CondominiumController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "/code={code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Condominium findByCode(@PathVariable(value = "code") int code) {
+        return service.findByCode(code);
+    }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)

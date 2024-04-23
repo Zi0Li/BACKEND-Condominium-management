@@ -40,6 +40,7 @@ public class AuthorizedPersonsService {
         entity.setCpf(authorizedPersons.getCpf());
         entity.setKinship(authorizedPersons.getKinship());
         entity.setPhone(authorizedPersons.getPhone());
+        entity.setResident(authorizedPersons.getResident());
 
         return repository.save(authorizedPersons);
     }

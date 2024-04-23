@@ -29,6 +29,12 @@ public class CondominiumService {
         return condominiumRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
     }
 
+    public Condominium findByCode(int code){
+        logger.info("Finding one condominium");
+
+        return condominiumRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("No records found for this CODE"));
+    }
+
     public Condominium update(Condominium condominium){
         logger.info("Updating one condominium");
 
