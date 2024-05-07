@@ -25,6 +25,11 @@ public class AuthorizedPersonsController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "/resident={id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<AuthorizedPersons> findByIdResident(@PathVariable(value = "id") int id) {
+        return service.findByIdResident(id);
+    }
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public AuthorizedPersons create(@RequestBody AuthorizedPersons authorizedPersons) {
         return service.create(authorizedPersons);

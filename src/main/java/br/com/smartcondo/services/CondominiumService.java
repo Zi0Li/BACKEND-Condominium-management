@@ -53,6 +53,7 @@ public class CondominiumService {
         entity.setNumber_apt(condominium.getNumber_apt());
 
         return condominiumRepository.save(condominium);
+
     }
 
     public void delete(Long id){

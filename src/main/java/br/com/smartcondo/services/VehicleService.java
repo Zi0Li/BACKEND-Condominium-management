@@ -29,6 +29,12 @@ public class VehicleService {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
+    public List<Vehicle> findByIdResident(Long id) {
+        logger.info("Finding one vehicle!");
+
+        return repository.findByResident_id(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this RESIDENT ID"));
+    }
+
     public Vehicle update(Vehicle vehicle) {
         logger.info("Updating one vehicle!");
 

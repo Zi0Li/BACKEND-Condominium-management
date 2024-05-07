@@ -32,7 +32,7 @@ public class SyndicateService {
 
         logger.info("Updating one syndicate");
 
-        Syndicate entity = syndicateRepository.findById(syndicate.getId()).orElseThrow(()-> new ResourceNotFoundException("JNo records found for this ID"));
+        Syndicate entity = syndicateRepository.findById(syndicate.getId()).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
 
         entity.setName(syndicate.getName());
         entity.setCpf(syndicate.getCpf());

@@ -26,6 +26,11 @@ public class VehicleController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "/resident={id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Vehicle> findByIdResident(@PathVariable(value = "id") Long id) {
+        return service.findByIdResident(id);
+    }
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Vehicle create(@RequestBody Vehicle vehicle) {
         return service.create(vehicle);

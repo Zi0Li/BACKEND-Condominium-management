@@ -29,6 +29,12 @@ public class AuthorizedPersonsService {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
+    public List<AuthorizedPersons> findByIdResident(int id) {
+        logger.info("Finding all authorized persons!");
+
+        return repository.findByResident_id(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
+    }
+
     public AuthorizedPersons update(AuthorizedPersons authorizedPersons) {
 
         logger.info("Updating one authorized person!");
