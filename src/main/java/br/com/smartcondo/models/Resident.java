@@ -25,12 +25,15 @@ public class Resident{
     private String name;
 
     @Column(nullable = false)
-    int age;
+    String block;
+
+    @Column(nullable = false)
+    String apt;
 
     @Column(nullable = false)
     private String phone;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -41,7 +44,7 @@ public class Resident{
     @OneToMany(mappedBy = "resident")
     private List<Vehicle> vehicles;
 
-    @OneToMany(mappedBy = "resident")
+    @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
     private List<AuthorizedPersons> authorizedPersons;
 
     @OneToMany(mappedBy = "resident")
@@ -83,15 +86,6 @@ public class Resident{
         return this;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public Resident setAge(int age) {
-        this.age = age;
-        return this;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -110,6 +104,24 @@ public class Resident{
         return this;
     }
 
+    public String getBlock() {
+        return block;
+    }
+
+    public Resident setBlock(String block) {
+        this.block = block;
+        return this;
+    }
+
+    public String getApt() {
+        return apt;
+    }
+
+    public Resident setApt(String apt) {
+        this.apt = apt;
+        return this;
+    }
+
     private List<Vehicle> getVehicles() {
         return vehicles;
     }
@@ -119,11 +131,11 @@ public class Resident{
         return this;
     }
 
-    private List<AuthorizedPersons> getAuthorizedPersons() {
+    public List<AuthorizedPersons> getAuthorizedPersons() {
         return authorizedPersons;
     }
 
-    private Resident setAuthorizedPersons(List<AuthorizedPersons> authorizedPersons) {
+    public Resident setAuthorizedPersons(List<AuthorizedPersons> authorizedPersons) {
         this.authorizedPersons = authorizedPersons;
         return this;
     }
@@ -153,15 +165,14 @@ public class Resident{
                 ", cpf='" + cpf + '\'' +
                 ", rg='" + rg + '\'' +
                 ", name='" + name + '\'' +
-                ", age=" + age +
+                ", block='" + block + '\'' +
+                ", apt='" + apt + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
+                ", condominium=" + condominium +
                 ", vehicles=" + vehicles +
                 ", authorizedPersons=" + authorizedPersons +
                 ", reservations=" + reservations +
-                ", condominium=" + condominium +
                 '}';
     }
-
-
 }

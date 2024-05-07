@@ -43,7 +43,8 @@ public class ResidentService {
         entity.setName(resident.getName());
         entity.setRg(resident.getRg());
         entity.setCpf(resident.getCpf());
-        entity.setAge(resident.getAge());
+        entity.setBlock(resident.getBlock());
+        entity.setApt(resident.getApt());
         entity.setEmail(resident.getEmail());
         entity.setPhone(resident.getPhone());
 
