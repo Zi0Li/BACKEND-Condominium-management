@@ -10,20 +10,20 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(nullable = false)
-    String date;
+    private String date;
 
     @Column(nullable = false)
-    String description;
+    private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "resident_id", nullable = false)
     @JsonBackReference(value = "resident")
     private Resident resident;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "kiosk_id", nullable = false)
     @JsonBackReference(value = "kiosk")
     private Kiosk kiosk;
@@ -55,11 +55,11 @@ public class Reservation {
         return this;
     }
 
-    public Resident getResident() {
+    private Resident getResident() {
         return resident;
     }
 
-    public Reservation setResident(Resident resident) {
+    private Reservation setResident(Resident resident) {
         this.resident = resident;
         return this;
     }
@@ -79,8 +79,6 @@ public class Reservation {
                 "id=" + id +
                 ", date='" + date + '\'' +
                 ", description='" + description + '\'' +
-                ", resident=" + resident +
-                ", kiosk=" + kiosk +
                 '}';
     }
 }

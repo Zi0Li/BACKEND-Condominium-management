@@ -1,7 +1,9 @@
 package br.com.smartcondo.controllers;
 
 import br.com.smartcondo.models.Kiosk;
+import br.com.smartcondo.records.ReservationAndKioskDTO;
 import br.com.smartcondo.services.KioskService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -48,4 +50,14 @@ public class KioskController {
         service.delete(id);
     }
 
+    @GetMapping(value = "/resident={id}", produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<Kiosk> findByIdResiden(@PathVariable(value = "id") long id) {
+        return service.findByIdResident(id);
+    }
+
+    @Transactional
+    @GetMapping(value = "/all/{id}",produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<ReservationAndKioskDTO> findAllDetails(@PathVariable(value = "id") Long id) {
+        return service.findAllDetails(id);
+    }
 }
