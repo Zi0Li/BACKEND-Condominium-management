@@ -47,6 +47,7 @@ public class ResidentService {
         entity.setApt(resident.getApt());
         entity.setEmail(resident.getEmail());
         entity.setPhone(resident.getPhone());
+        resident.setCondominium(entity.getCondominium());
 
         return residentRepository.save(resident);
     }
@@ -65,5 +66,13 @@ public class ResidentService {
         logger.info("Creating one resident!");
 
         return residentRepository.save(resident);
+    }
+
+    public List<Resident> findNeighbors(Long id) {
+        logger.info("Finding all Neighbors!");
+
+        Resident resident = residentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+
+        return residentRepository.findByCondominium_id(resident.getCondominium().getId());
     }
 }

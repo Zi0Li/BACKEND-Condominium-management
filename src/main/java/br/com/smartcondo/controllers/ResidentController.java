@@ -36,6 +36,10 @@ public class ResidentController {
         return service.create(resident);
     }
 
+    @GetMapping(value = "/{id}/neighbors", produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<Resident> findNeighbors(@PathVariable(value = "id") long id) {
+        return service.findNeighbors(id);
+    }
 
     @PutMapping(produces= MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)

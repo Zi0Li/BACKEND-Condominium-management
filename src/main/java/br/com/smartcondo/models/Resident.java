@@ -36,15 +36,15 @@ public class Resident{
     @Column(nullable = false, unique = true)
     private String email;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "condominium_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "condominium_id")
     @JsonBackReference(value = "condominium")
     private Condominium condominium;
 
     @OneToMany(mappedBy = "resident")
     private List<Vehicle> vehicles;
 
-    @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resident")
     private List<AuthorizedPersons> authorizedPersons;
 
     @OneToMany(mappedBy = "resident")
@@ -131,11 +131,11 @@ public class Resident{
         return this;
     }
 
-    public List<AuthorizedPersons> getAuthorizedPersons() {
+    private List<AuthorizedPersons> getAuthorizedPersons() {
         return authorizedPersons;
     }
 
-    public Resident setAuthorizedPersons(List<AuthorizedPersons> authorizedPersons) {
+    private Resident setAuthorizedPersons(List<AuthorizedPersons> authorizedPersons) {
         this.authorizedPersons = authorizedPersons;
         return this;
     }
