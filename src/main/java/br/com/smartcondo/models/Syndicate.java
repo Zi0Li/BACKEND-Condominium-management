@@ -24,6 +24,9 @@ public class Syndicate {
     @Column(nullable = false)
     private String phone;
 
+    @Column(nullable = false)
+    private String email;
+
     @OneToMany(mappedBy = "syndicate", fetch = FetchType.EAGER)
     private List<Condominium> condominiums;
 
@@ -72,6 +75,15 @@ public class Syndicate {
         return this;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public Syndicate setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
     public List<Condominium> getCondominiums() {
         return condominiums;
     }
@@ -89,6 +101,7 @@ public class Syndicate {
                 ", rg='" + rg + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
                 ", condominiums=" + condominiums +
                 '}';
     }

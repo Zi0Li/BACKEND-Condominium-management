@@ -20,8 +20,7 @@ public class SyndicateController {
         return service.findAll();
     }
 
-    @GetMapping(value = "/{id}",produces= MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}",produces= MediaType.APPLICATION_JSON_VALUE)
     public Syndicate findById(@PathVariable(value = "id") long id){
         return service.findById(id);
     }

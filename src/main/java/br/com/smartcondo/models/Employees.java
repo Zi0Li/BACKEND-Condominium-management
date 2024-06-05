@@ -9,25 +9,28 @@ public class Employees {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(nullable = false)
-    String name;
+    private String name;
 
     @Column(nullable = false)
-    String cpf;
+    private String cpf;
 
     @Column(nullable = false)
-    String rg;
+    private String rg;
 
     @Column(nullable = false)
-    String phone;
+    private String phone;
 
     @Column(nullable = false)
-    String position;
+    private String position;
 
     @Column(nullable = false)
-    String workload;
+    private String workload;
+
+    @Column(nullable = false)
+    private String email;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "condominium_id", nullable = false)
@@ -97,6 +100,15 @@ public class Employees {
         return this;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public Employees setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
     public Condominium getCondominium() {
         return condominium;
     }
@@ -116,6 +128,8 @@ public class Employees {
                 ", phone='" + phone + '\'' +
                 ", position='" + position + '\'' +
                 ", workload='" + workload + '\'' +
+                ", email='" + email + '\'' +
+                ", condominium=" + condominium +
                 '}';
     }
 }

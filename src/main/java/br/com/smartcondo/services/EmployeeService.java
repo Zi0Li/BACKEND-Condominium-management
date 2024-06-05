@@ -49,6 +49,7 @@ public class EmployeeService {
         entity.setRg(employees.getRg());
         entity.setPosition(employees.getPosition());
         entity.setWorkload(employees.getWorkload());
+        entity.setEmail(employees.getEmail());
 
         return employeesRepository.save(employees);
     }
