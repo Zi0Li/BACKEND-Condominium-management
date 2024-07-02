@@ -1,6 +1,7 @@
 package br.com.smartcondo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -26,8 +27,9 @@ public class Kiosk {
     @JsonBackReference(value = "condominium")
     private Condominium condominium;
 
-    @OneToMany(mappedBy = "kiosk")
+    @OneToMany(mappedBy = "kiosk", fetch = FetchType.EAGER)
     @JsonBackReference(value = "reservations")
+    @JsonIgnore
     private List<Reservation> reservations;
 
     public Long getId() {

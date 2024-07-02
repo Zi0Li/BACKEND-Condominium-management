@@ -83,7 +83,6 @@ public class KioskService {
         List<Kiosk> kiosks = findByIdResident(id);
         List<ReservationAndKioskDTO> reservationAndKioskDTOS = new ArrayList<>();
         for (Kiosk kiosk : kiosks){
-            System.out.println(kiosk.getReservations());
             reservationAndKioskDTOS.add(new ReservationAndKioskDTO(kiosk.getReservations(), kiosk));
         }
         return reservationAndKioskDTOS;
