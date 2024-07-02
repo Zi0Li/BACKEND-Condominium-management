@@ -29,7 +29,7 @@ public class Employees {
     @Column(nullable = false)
     private String workload;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @ManyToOne(fetch = FetchType.EAGER)

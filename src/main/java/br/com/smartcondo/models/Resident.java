@@ -1,6 +1,7 @@
 package br.com.smartcondo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
@@ -9,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "resident")
 @JsonPropertyOrder({"id", "name", "cpf", "rg", "age", "phone"})
-public class Resident{
+public class Resident {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,13 +42,16 @@ public class Resident{
     @JsonBackReference(value = "condominium")
     private Condominium condominium;
 
-    @OneToMany(mappedBy = "resident")
+    @JsonIgnore
+    @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
     private List<Vehicle> vehicles;
 
-    @OneToMany(mappedBy = "resident")
+    @JsonIgnore
+    @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
     private List<AuthorizedPersons> authorizedPersons;
 
     @OneToMany(mappedBy = "resident")
+    @JsonIgnore
     private List<Reservation> reservations;
 
     public Long getId() {
@@ -122,29 +126,29 @@ public class Resident{
         return this;
     }
 
-    private List<Vehicle> getVehicles() {
+    public List<Vehicle> getVehicles() {
         return vehicles;
     }
 
-    private Resident setVehicles(List<Vehicle> vehicles) {
+    public Resident setVehicles(List<Vehicle> vehicles) {
         this.vehicles = vehicles;
         return this;
     }
 
-    private List<AuthorizedPersons> getAuthorizedPersons() {
+    public List<AuthorizedPersons> getAuthorizedPersons() {
         return authorizedPersons;
     }
 
-    private Resident setAuthorizedPersons(List<AuthorizedPersons> authorizedPersons) {
+    public Resident setAuthorizedPersons(List<AuthorizedPersons> authorizedPersons) {
         this.authorizedPersons = authorizedPersons;
         return this;
     }
 
-    private List<Reservation> getReservations() {
+    public List<Reservation> getReservations() {
         return reservations;
     }
 
-    private Resident setReservations(List<Reservation> reservations) {
+    public Resident setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
         return this;
     }

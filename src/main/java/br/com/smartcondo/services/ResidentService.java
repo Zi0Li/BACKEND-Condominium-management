@@ -1,11 +1,19 @@
 package br.com.smartcondo.services;
 
 import br.com.smartcondo.exceptions.ResourceNotFoundException;
+import br.com.smartcondo.models.AuthorizedPersons;
 import br.com.smartcondo.models.Resident;
+import br.com.smartcondo.models.Vehicle;
+import br.com.smartcondo.records.ResidentAllDetailsDTO;
+import br.com.smartcondo.repositories.AuthorizedPersonsRepository;
 import br.com.smartcondo.repositories.ResidentRepository;
+import br.com.smartcondo.repositories.VehicleRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.parser.Entity;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -28,10 +36,17 @@ public class ResidentService {
         return residentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
-    public List<Resident> findByIdCondominium(Long id){
+    @Transactional
+    public List<ResidentAllDetailsDTO> findByIdCondominium(Long id){
         logger.info("Finding all peoples this condominium");
+        List<Resident> residents = residentRepository.findByCondominium_id(id);
+        List<ResidentAllDetailsDTO> residentAllDetailsDTOS = new ArrayList<>();
+        for (Resident resident : residents){
 
-        return residentRepository.findByCondominium_id(id);
+            residentAllDetailsDTOS.add(new ResidentAllDetailsDTO(resident, resident.getAuthorizedPersons(), resident.getVehicles()));
+        }
+
+        return residentAllDetailsDTOS;
     }
 
     public Resident update(Resident resident) {

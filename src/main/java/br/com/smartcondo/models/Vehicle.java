@@ -131,7 +131,6 @@ public class Vehicle {
                 ", color='" + color + '\'' +
                 ", model='" + model + '\'' +
                 ", year='" + year + '\'' +
-                ", resident=" + resident +
                 '}';
     }
 }

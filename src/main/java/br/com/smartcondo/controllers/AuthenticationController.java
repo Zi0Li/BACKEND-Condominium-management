@@ -1,13 +1,10 @@
 package br.com.smartcondo.controllers;
 
 import br.com.smartcondo.enums.UserRole;
-import br.com.smartcondo.exceptions.ResourceNotFoundException;
 import br.com.smartcondo.models.Users;
 import br.com.smartcondo.records.AuthenticationDTO;
 import br.com.smartcondo.records.LoginResponseDTO;
 import br.com.smartcondo.records.RegisterDTO;
-import br.com.smartcondo.repositories.ResidentRepository;
-import br.com.smartcondo.repositories.SyndicateRepository;
 import br.com.smartcondo.repositories.UsersRepository;
 import br.com.smartcondo.services.EmployeeService;
 import br.com.smartcondo.services.ResidentService;

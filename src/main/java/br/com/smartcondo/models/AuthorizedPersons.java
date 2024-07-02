@@ -108,4 +108,16 @@ public class AuthorizedPersons {
     public int hashCode() {
         return Objects.hash(id, name, rg, cpf, kinship, phone, resident);
     }
+
+    @Override
+    public String toString() {
+        return "AuthorizedPersons{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", rg='" + rg + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", kinship='" + kinship + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }

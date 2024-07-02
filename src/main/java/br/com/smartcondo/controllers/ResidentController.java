@@ -1,7 +1,9 @@
 package br.com.smartcondo.controllers;
 
 import br.com.smartcondo.models.Resident;
+import br.com.smartcondo.records.ResidentAllDetailsDTO;
 import br.com.smartcondo.services.ResidentService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +27,9 @@ public class ResidentController {
         return service.findById(id);
     }
 
+    @Transactional
     @GetMapping(value = "/condominium={id}", produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<Resident> findByIdCondominium(@PathVariable(value = "id") long id) {
+    public List<ResidentAllDetailsDTO> findByIdCondominium(@PathVariable(value = "id") long id) {
         return service.findByIdCondominium(id);
     }
 
