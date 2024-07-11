@@ -48,6 +48,10 @@ public class Resident {
 
     @JsonIgnore
     @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
+    private List<Report> reports;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
     private List<AuthorizedPersons> authorizedPersons;
 
     @OneToMany(mappedBy = "resident")
@@ -162,6 +166,15 @@ public class Resident {
         return this;
     }
 
+    public List<Report> getReports() {
+        return reports;
+    }
+
+    public Resident setReports(List<Report> reports) {
+        this.reports = reports;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Resident{" +
@@ -173,10 +186,6 @@ public class Resident {
                 ", apt='" + apt + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", condominium=" + condominium +
-                ", vehicles=" + vehicles +
-                ", authorizedPersons=" + authorizedPersons +
-                ", reservations=" + reservations +
                 '}';
     }
 }

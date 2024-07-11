@@ -2,6 +2,7 @@ package br.com.smartcondo.models;
 
 import br.com.smartcondo.controllers.RandomController;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -66,6 +67,9 @@ public class Condominium {
 
     @OneToMany(mappedBy = "condominium")
     private List<Notification> notifications;
+
+    @OneToMany(mappedBy = "condominium")
+    private List<Report> reports;
 
     public Long getId() {
         return id;

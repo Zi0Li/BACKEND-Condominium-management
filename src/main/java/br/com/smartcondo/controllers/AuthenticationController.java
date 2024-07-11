@@ -5,6 +5,7 @@ import br.com.smartcondo.models.Users;
 import br.com.smartcondo.records.AuthenticationDTO;
 import br.com.smartcondo.records.LoginResponseDTO;
 import br.com.smartcondo.records.RegisterDTO;
+import br.com.smartcondo.records.ResidentAllDetailsDTO;
 import br.com.smartcondo.repositories.UsersRepository;
 import br.com.smartcondo.services.EmployeeService;
 import br.com.smartcondo.services.ResidentService;
@@ -55,7 +56,8 @@ public class AuthenticationController {
         Object entity;
         String role = user.getRole().toString();
         if (user.getRole() == UserRole.MORADOR) {
-            entity = residentService.findById(user.getUser_id());
+            ResidentAllDetailsDTO resident = residentService.findById(user.getUser_id());
+            entity = resident.resident();
         } else if (user.getRole() == UserRole.FUNCIONARIO) {
             entity = employeeService.findById(user.getUser_id());
         } else if (user.getRole() == UserRole.SINDICO) {
