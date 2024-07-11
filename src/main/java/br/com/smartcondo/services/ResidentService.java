@@ -30,10 +30,12 @@ public class ResidentService {
         return residentRepository.findAll();
     }
 
-    public Resident findById(Long id) {
+    @Transactional
+    public ResidentAllDetailsDTO findById(Long id) {
         logger.info("Finding one people!");
+        Resident resident =residentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
-        return residentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        return new ResidentAllDetailsDTO(resident, null, null, resident.getCondominium());
     }
 
     @Transactional
@@ -42,8 +44,7 @@ public class ResidentService {
         List<Resident> residents = residentRepository.findByCondominium_id(id);
         List<ResidentAllDetailsDTO> residentAllDetailsDTOS = new ArrayList<>();
         for (Resident resident : residents){
-
-            residentAllDetailsDTOS.add(new ResidentAllDetailsDTO(resident, resident.getAuthorizedPersons(), resident.getVehicles()));
+            residentAllDetailsDTOS.add(new ResidentAllDetailsDTO(resident, resident.getAuthorizedPersons(), resident.getVehicles(), null));
         }
 
         return residentAllDetailsDTOS;
@@ -89,5 +90,11 @@ public class ResidentService {
         Resident resident = residentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
         return residentRepository.findByCondominium_id(resident.getCondominium().getId());
+    }
+
+    public Resident findByCpfOrRg(String search) {
+        logger.info("Finding one people search!");
+
+        return residentRepository.findByCpfOrRg(search,search).orElseThrow(() -> new ResourceNotFoundException("No records found for this SEARCH"));
     }
 }

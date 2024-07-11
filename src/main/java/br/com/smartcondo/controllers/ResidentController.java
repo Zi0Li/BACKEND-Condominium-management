@@ -22,8 +22,9 @@ public class ResidentController {
         return service.findAll();
     }
 
+    @Transactional
     @GetMapping(value = "/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
-    public Resident findById(@PathVariable(value = "id") long id) {
+    public ResidentAllDetailsDTO findById(@PathVariable(value = "id") long id) {
         return service.findById(id);
     }
 
@@ -53,5 +54,10 @@ public class ResidentController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable(value = "id") Long id) {
         service.delete(id);
+    }
+
+    @GetMapping(value = "/search/{search}", produces= MediaType.APPLICATION_JSON_VALUE)
+    public Resident findByCpfOrRg(@PathVariable(value = "search") String search) {
+        return service.findByCpfOrRg(search);
     }
 }

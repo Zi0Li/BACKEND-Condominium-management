@@ -1,7 +1,9 @@
 package br.com.smartcondo.controllers;
 
 import br.com.smartcondo.models.AuthorizedPersons;
+import br.com.smartcondo.records.ResidentAllDetailsDTO;
 import br.com.smartcondo.services.AuthorizedPersonsService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +46,12 @@ public class AuthorizedPersonsController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable(value = "id") Long id) {
         service.delete(id);
+    }
+
+
+    @Transactional
+    @GetMapping(value = "/search/{search}", produces= MediaType.APPLICATION_JSON_VALUE)
+    public ResidentAllDetailsDTO findByCpfOrRg(@PathVariable(value = "search") String search) {
+        return service.findByCpfOrRg(search);
     }
 }

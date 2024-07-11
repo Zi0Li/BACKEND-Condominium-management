@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface AuthorizedPersonsRepository extends JpaRepository<AuthorizedPersons, Long> {
     Optional<List<AuthorizedPersons>> findByResident_id(int id);
+
+    Optional<AuthorizedPersons> findByCpfOrRg(String cpf, String rg);
 }

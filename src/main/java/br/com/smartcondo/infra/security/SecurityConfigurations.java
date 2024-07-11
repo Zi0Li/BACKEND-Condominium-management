@@ -31,6 +31,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/resident").permitAll()
                         .requestMatchers(HttpMethod.GET, "/condominium/code={code}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/authorizedPersons").hasRole("MORADOR")
+                        .requestMatchers(HttpMethod.POST, "/authorizedPersons/search/{search}").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

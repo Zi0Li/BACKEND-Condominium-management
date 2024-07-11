@@ -2,10 +2,13 @@ package br.com.smartcondo.services;
 
 import br.com.smartcondo.exceptions.ResourceNotFoundException;
 import br.com.smartcondo.models.AuthorizedPersons;
+import br.com.smartcondo.records.ResidentAllDetailsDTO;
 import br.com.smartcondo.repositories.AuthorizedPersonsRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -32,7 +35,7 @@ public class AuthorizedPersonsService {
     public List<AuthorizedPersons> findByIdResident(int id) {
         logger.info("Finding all authorized persons!");
 
-        return repository.findByResident_id(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
+        return repository.findByResident_id(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
     public AuthorizedPersons update(AuthorizedPersons authorizedPersons) {
@@ -65,5 +68,14 @@ public class AuthorizedPersonsService {
         logger.info("Creating one authorized person!");
 
         return repository.save(authorizedPersons);
+    }
+
+    @Transactional
+    public ResidentAllDetailsDTO findByCpfOrRg(String search) {
+        logger.info("Finding one people search!");
+        AuthorizedPersons authorizedPersons = repository.findByCpfOrRg(search, search).orElseThrow(() -> new ResourceNotFoundException("No records found for this SEARCH"));
+        List<AuthorizedPersons> authorizedPersonsList = new ArrayList<>();
+        authorizedPersonsList.add(authorizedPersons);
+        return new ResidentAllDetailsDTO(authorizedPersons.getResident(), authorizedPersonsList, null, null);
     }
 }
