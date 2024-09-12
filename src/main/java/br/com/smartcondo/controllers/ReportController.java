@@ -34,7 +34,7 @@ public class ReportController {
     }
 
     @GetMapping(value = "/resident={id}", produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<Report> findByIdCResident(@PathVariable(value = "id") long id) {
+    public List<Report> findByIdResident(@PathVariable(value = "id") long id) {
         return service.findByIdResident(id);
     }
 

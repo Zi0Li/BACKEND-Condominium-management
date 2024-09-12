@@ -72,8 +72,8 @@ public class AuthorizedPersonsService {
 
     @Transactional
     public ResidentAllDetailsDTO findByCpfOrRg(String search) {
-        logger.info("Finding one people search!");
-        AuthorizedPersons authorizedPersons = repository.findByCpfOrRg(search, search).orElseThrow(() -> new ResourceNotFoundException("No records found for this SEARCH"));
+        logger.info("Finding one AuthorizedPersons search!");
+        AuthorizedPersons authorizedPersons = repository.findByCpfOrRg(search, search).orElseThrow(() -> new ResourceNotFoundException("No records found for this SEARCH authorized person"));
         List<AuthorizedPersons> authorizedPersonsList = new ArrayList<>();
         authorizedPersonsList.add(authorizedPersons);
         return new ResidentAllDetailsDTO(authorizedPersons.getResident(), authorizedPersonsList, null, null);

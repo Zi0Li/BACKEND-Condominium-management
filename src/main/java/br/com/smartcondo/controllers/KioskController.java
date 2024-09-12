@@ -51,7 +51,7 @@ public class KioskController {
     }
 
     @GetMapping(value = "/resident={id}", produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<Kiosk> findByIdResiden(@PathVariable(value = "id") long id) {
+    public List<Kiosk> findByIdResident(@PathVariable(value = "id") long id) {
         return service.findByIdResident(id);
     }
 

@@ -93,8 +93,8 @@ public class ResidentService {
     }
 
     public Resident findByCpfOrRg(String search) {
-        logger.info("Finding one people search!");
+        logger.info("Finding one resident search!");
 
-        return residentRepository.findByCpfOrRg(search,search).orElseThrow(() -> new ResourceNotFoundException("No records found for this SEARCH"));
+        return residentRepository.findByCpfOrRg(search, search).orElseThrow(() -> new ResourceNotFoundException("No records found for this SEARCH resident"));
     }
 }
