@@ -69,6 +69,9 @@ public class Condominium {
     private List<Notification> notifications;
 
     @OneToMany(mappedBy = "condominium")
+    private List<Correspondence> correspondences;
+
+    @OneToMany(mappedBy = "condominium")
     private List<Report> reports;
 
     public Long getId() {
@@ -232,6 +235,22 @@ public class Condominium {
     private Condominium setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
         return this;
+    }
+
+    private List<Correspondence> getCorrespondences() {
+        return correspondences;
+    }
+
+    private void setCorrespondences(List<Correspondence> correspondences) {
+        this.correspondences = correspondences;
+    }
+
+    private List<Report> getReports() {
+        return reports;
+    }
+
+    private void setReports(List<Report> reports) {
+        this.reports = reports;
     }
 
     @Override

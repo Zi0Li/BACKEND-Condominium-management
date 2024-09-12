@@ -54,9 +54,13 @@ public class Resident {
     @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
     private List<AuthorizedPersons> authorizedPersons;
 
-    @OneToMany(mappedBy = "resident")
     @JsonIgnore
+    @OneToMany(mappedBy = "resident")
     private List<Reservation> reservations;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "resident", fetch = FetchType.EAGER)
+    private List<Correspondence> correspondences;
 
     public Long getId() {
         return id;
@@ -173,6 +177,14 @@ public class Resident {
     public Resident setReports(List<Report> reports) {
         this.reports = reports;
         return this;
+    }
+
+    public List<Correspondence> getCorrespondences() {
+        return correspondences;
+    }
+
+    public void setCorrespondences(List<Correspondence> correspondences) {
+        this.correspondences = correspondences;
     }
 
     @Override
