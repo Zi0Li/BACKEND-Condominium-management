@@ -74,6 +74,9 @@ public class Condominium {
     @OneToMany(mappedBy = "condominium")
     private List<Report> reports;
 
+    @OneToMany(mappedBy = "condominium")
+    private List<Rule> rules;
+
     public Long getId() {
         return id;
     }
