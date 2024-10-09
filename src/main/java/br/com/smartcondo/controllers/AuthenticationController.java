@@ -56,8 +56,7 @@ public class AuthenticationController {
         Object entity;
         String role = user.getRole().toString();
         if (user.getRole() == UserRole.MORADOR) {
-            ResidentAllDetailsDTO resident = residentService.findById(user.getUser_id());
-            entity = resident.resident();
+            entity = residentService.findById(user.getUser_id());
         } else if (user.getRole() == UserRole.FUNCIONARIO) {
             entity = employeeService.findById(user.getUser_id());
         } else if (user.getRole() == UserRole.SINDICO) {

@@ -2,7 +2,9 @@ package br.com.smartcondo.services;
 
 import br.com.smartcondo.exceptions.ResourceNotFoundException;
 import br.com.smartcondo.models.Employees;
+import br.com.smartcondo.records.EmployeeAllDetailsDTO;
 import br.com.smartcondo.repositories.EmployeesRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +26,12 @@ public class EmployeeService {
         return employeesRepository.findAll();
     }
 
-    public Employees findById(Long id){
-
+    @Transactional
+    public EmployeeAllDetailsDTO findById(Long id){
         logger.info("Finding one employee!");
+         Employees entity = employeesRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
 
-        return employeesRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
+        return new EmployeeAllDetailsDTO(entity, entity.getCondominium());
     }
 
     public List<Employees> findByIdCondominium(Long id){

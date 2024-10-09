@@ -1,7 +1,9 @@
 package br.com.smartcondo.controllers;
 
 import br.com.smartcondo.models.Employees;
+import br.com.smartcondo.records.EmployeeAllDetailsDTO;
 import br.com.smartcondo.services.EmployeeService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +22,9 @@ public class EmployeeController {
         return employeeService.findAll();
     }
 
+    @Transactional
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Employees findByID(@PathVariable(value = "id") Long id) {
+    public EmployeeAllDetailsDTO findByID(@PathVariable(value = "id") Long id) {
         return employeeService.findById(id);
     }
 

@@ -29,6 +29,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/resident").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/syndicate").permitAll()
                         .requestMatchers(HttpMethod.GET, "/condominium/code={code}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/authorizedPersons").hasRole("MORADOR")
                         .requestMatchers(HttpMethod.POST, "/authorizedPersons/search/{search}").permitAll()
