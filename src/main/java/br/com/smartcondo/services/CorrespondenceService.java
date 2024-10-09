@@ -34,6 +34,12 @@ public class CorrespondenceService {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
+    public List<Correspondence> findByIdUser(long id){
+        logger.info("Finding one correspondence!");
+
+        return repository.findByResident_id(id);
+    }
+
     @Transactional
     public List<CorrespondenceDTO> findByIdCondominium(long id){
         logger.info("Finding all correspondence by condominium!");

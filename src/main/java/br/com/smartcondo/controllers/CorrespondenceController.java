@@ -28,6 +28,11 @@ public class CorrespondenceController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "/resident={id}",produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<Correspondence> findByResident(@PathVariable(value = "id") long id) {
+        return service.findByIdUser(id);
+    }
+
     @Transactional
     @GetMapping(value = "/condominium={id}",produces= MediaType.APPLICATION_JSON_VALUE)
     public List<CorrespondenceDTO> findByCondominium(@PathVariable(value = "id") long id) {

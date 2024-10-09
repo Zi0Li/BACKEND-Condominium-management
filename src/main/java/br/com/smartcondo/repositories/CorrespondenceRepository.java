@@ -10,4 +10,6 @@ import java.util.List;
 public interface CorrespondenceRepository extends JpaRepository<Correspondence, Long> {
 
     List<Correspondence> findByCondominium_id(Long id);
+
+    List<Correspondence> findByResident_id(Long id);
 }
